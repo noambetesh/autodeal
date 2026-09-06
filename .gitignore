@@ -1,0 +1,6 @@
+server/data/settings.json
+server/.env
+*.keystore
+*.jks
+android/local.properties
+.DS_Store
