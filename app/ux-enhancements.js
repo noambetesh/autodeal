@@ -1,4 +1,15 @@
 (() => {
+  const style = document.createElement('link');
+  style.rel = 'stylesheet';
+  style.href = 'ux-enhancements.css';
+  document.head.appendChild(style);
+
+  if (Array.isArray(state.listings)) {
+    const before = state.listings.length;
+    state.listings = state.listings.filter(item => !String(item.id || '').startsWith('demo-'));
+    if (state.listings.length !== before) set('autodeal.listings', state.listings);
+  }
+
   const digits = value => String(value || '').replace(/\D/g, '');
   const formatDigits = value => {
     const raw = digits(value);
@@ -44,10 +55,9 @@
 
   card = function(listing) {
     const diff = comparisonDiff(listing);
-    const hasRealPrice = !!(listing.leviPrice || listing.yad2Price);
-    const sourceBadge = listing.leviPrice ? 'לוי יצחק' : listing.yad2Price ? 'מחירון יד2' : listing.marketMedian ? 'חציון שוק' : 'ללא מחירון';
+    const sourceBadge = listing.leviPrice ? 'לוי יצחק' : listing.yad2Price ? 'מחירון יד2' : listing.marketMedian ? 'חציון שוק' : 'מחירון';
     const analysis = diff === null
-      ? 'עדיין אין מחירון להשוואה. פתח את המודעה כדי לבדוק את פרטי הרכב.'
+      ? 'עדיין אין מחירון זמין להשוואה.'
       : `<span class="${diff >= 0 ? 'positive' : 'negative'}">${Math.abs(diff).toFixed(1)}% ${diff >= 0 ? 'מתחת' : 'מעל'} ל-${sourceBadge}</span>`;
     return `<article class="card modern-card">
       <div class="car-image">${carVisual(listing)}<span class="badge">${esc(listing.status || 'מודעה')}</span><span class="score">${listing.score || '-'}</span></div>
@@ -59,7 +69,7 @@
           <div class="${listing.yad2Price ? 'has-price' : ''}"><small>מחירון יד2</small><strong>${yad2Text(listing)}</strong></div>
           <div class="${listing.leviPrice ? 'has-price' : ''}"><small>לוי יצחק</small><strong>${priceText(listing.leviPrice)}</strong></div>
         </div>
-        <div class="analysis ${hasRealPrice ? 'analysis-live' : ''}">${analysis}</div>
+        <div class="analysis">${analysis}</div>
         <div class="card-actions"><button class="btn primary" onclick="details('${esc(listing.id)}')">כל הפרטים</button><button class="btn" onclick="toggleSave('${esc(listing.id)}')">${state.saved.includes(listing.id) ? 'נשמר ✓' : 'שמור'}</button><button class="btn ghost" onclick="ignoreCar('${esc(listing.id)}')">הסתר</button></div>
       </div>
     </article>`;
@@ -92,7 +102,7 @@
       const data = await api('/api/search/run', 'POST', search);
       merge(data.listings || []);
       if (data.providerError) {
-        toast(data.providerError === 'yad2_blocked' ? 'יד2 חסם כרגע את הקריאה האוטומטית' : 'החיפוש בוצע, אך מקור יד2 לא החזיר נתונים');
+        toast(data.providerError === 'yad2_blocked' ? 'יד2 חסם כרגע את הקריאה האוטומטית' : 'החיפוש נשמר, אבל יד2 לא החזיר נתונים כרגע');
       } else {
         toast(`נמצאו ${data.listings?.length || 0} מודעות מתאימות`);
       }
