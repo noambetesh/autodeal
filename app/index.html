@@ -61,9 +61,9 @@
     <section id="page-settings" class="page hidden">
       <h1>הגדרות</h1>
       <div class="panel settings-list">
-        <div class="setting"><div><strong>שרת נתונים</strong><small id="serverState">לא הוגדר</small></div><button id="serverConfig" class="btn">הגדר</button></div>
-        <div class="setting"><div><strong>Telegram</strong><small id="telegramState">נדרש שרת נתונים</small></div><div><button id="telegramConfig" class="btn">הגדר</button><button id="testTelegram" class="btn ghost">בדיקה</button></div></div>
-        <div class="setting"><div><strong>יד2</strong><small id="yad2State">חיבור דרך קישור חיפוש ציבורי</small></div><button id="testYad2" class="btn">בדוק וייבא</button></div>
+        <div class="setting"><div><strong>שרת נתונים</strong><small id="serverState">מחובר אוטומטית</small></div><button id="serverConfig" class="btn">שנה</button></div>
+        <div class="setting"><div><strong>Telegram</strong><small id="telegramState">אופציונלי</small></div><div><button id="telegramConfig" class="btn">הגדר</button><button id="testTelegram" class="btn ghost">בדיקה</button></div></div>
+        <div class="setting"><div><strong>יד2</strong><small id="yad2State">מחובר דרך AutoDeal Cloud</small></div><button id="testYad2" class="btn">בדוק וייבא</button></div>
         <div class="setting"><div><strong>מחירון לוי יצחק</strong><small id="leviState">מחירון ידני או חציון שוק</small></div><div><button id="leviConfig" class="btn">API מורשה</button><button id="manualPrice" class="btn ghost">הזן מחיר</button></div></div>
         <div class="setting"><div><strong>התראות במכשיר</strong><small>אישור התראות מהדפדפן או האפליקציה</small></div><button id="requestNotify" class="btn">הפעל</button></div>
         <div class="setting"><div><strong>גיבוי נתונים</strong><small>ייצוא JSON של הנתונים המקומיים</small></div><button id="exportData" class="btn">ייצוא</button></div>
@@ -92,7 +92,9 @@
 
   <div id="detailModal" class="modal hidden"><div class="modal-card wide-card" id="detailContent"></div></div>
   <div id="toast" class="toast hidden"></div>
+  <script src="config.js"></script>
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script src="autostart.js"></script>
 </body>
 </html>
