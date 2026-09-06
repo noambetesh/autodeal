@@ -1,0 +1,21 @@
+plugins { id 'com.android.application' }
+
+android {
+  namespace 'il.autodeal.app'
+  compileSdk 36
+
+  defaultConfig {
+    applicationId 'il.autodeal.app'
+    minSdk 26
+    targetSdk 36
+    versionCode 1
+    versionName '1.0.0'
+  }
+}
+
+tasks.register('syncWebAssets', Copy) {
+  from '../../app'
+  into 'src/main/assets'
+}
+
+preBuild.dependsOn syncWebAssets
