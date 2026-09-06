@@ -1,0 +1,45 @@
+{
+  "listings": [
+    {
+      "id": "seed-1",
+      "make": "Toyota",
+      "model": "RAV4",
+      "trim": "Hybrid",
+      "year": 2023,
+      "price": 189000,
+      "referencePrice": 207000,
+      "marketMedian": 201500,
+      "mileage": 41000,
+      "hand": 1,
+      "location": "תל אביב",
+      "seller": "מוכר פרטי",
+      "fuel": "היברידי",
+      "score": 91,
+      "published": "עכשיו",
+      "status": "חדש",
+      "sourceUrl": "https://www.yad2.co.il/vehicles/cars"
+    },
+    {
+      "id": "seed-2",
+      "make": "Kia",
+      "model": "Niro",
+      "trim": "EX Hybrid",
+      "year": 2022,
+      "price": 129500,
+      "referencePrice": 143000,
+      "marketMedian": 138900,
+      "mileage": 53500,
+      "hand": 1,
+      "location": "ראשון לציון",
+      "seller": "מוכר פרטי",
+      "fuel": "היברידי",
+      "score": 88,
+      "published": "עכשיו",
+      "status": "חדש",
+      "sourceUrl": "https://www.yad2.co.il/vehicles/cars"
+    }
+  ],
+  "searches": [],
+  "history": [],
+  "pricebook": []
+}
