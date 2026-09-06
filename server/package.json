@@ -1,1 +1,1 @@
-{"name":"autodeal-server","version":"1.0.0","private":true,"type":"module","scripts":{"start":"node server.mjs"}}
+{"name":"autodeal-server","version":"2.0.0","private":true,"type":"module","scripts":{"start":"node server-v2.mjs"}}
