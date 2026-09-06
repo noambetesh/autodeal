@@ -1,7 +1,8 @@
 (() => {
-  const DEFAULT_SERVER_URL = 'https://autodeal-api-production.up.railway.app';
+  const DEFAULT_SERVER_URL = 'https://autodeal-api-v2-production.up.railway.app';
   const LEGACY_SERVER_URLS = new Set([
-    'https://autodeal-api-noambeteshs-projects.vercel.app'
+    'https://autodeal-api-noambeteshs-projects.vercel.app',
+    'https://autodeal-api-production.up.railway.app'
   ]);
 
   try {
