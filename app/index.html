@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <title>AutoDeal - חיפוש רכבים</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div><strong class="brand">AutoDeal</strong><span class="sub">מוצאים עסקה טובה יותר</span></div>
+    <button id="refreshBtn" class="icon-btn" aria-label="רענון">↻</button>
+  </header>
+
+  <main>
+    <section id="page-dashboard" class="page">
+      <div class="hero"><div><h1>לוח בקרה</h1><p>כל הרכבים, ההתראות והעסקאות במקום אחד.</p></div><button class="btn primary" data-open-search>חיפוש חדש</button></div>
+      <div class="metrics">
+        <div class="metric"><small>חדשות היום</small><strong id="mNew">0</strong></div>
+        <div class="metric"><small>עסקאות מומלצות</small><strong id="mDeals">0</strong></div>
+        <div class="metric"><small>רכבים במעקב</small><strong id="mSaved">0</strong></div>
+        <div class="metric"><small>הנחה ממוצעת</small><strong id="mDiscount">0%</strong></div>
+      </div>
+      <div class="section-head"><h2>עסקאות מובילות</h2><button class="link-btn" data-nav="listings">לכל המודעות</button></div>
+      <div id="dashboardListings" class="cards"></div>
+    </section>
+
+    <section id="page-listings" class="page hidden">
+      <div class="section-head"><h1>מודעות</h1><span id="sourceStatus" class="status">מצב מקומי</span></div>
+      <div class="filters">
+        <input id="filterText" placeholder="חיפוש לפי יצרן או דגם">
+        <input id="filterPrice" type="number" inputmode="numeric" placeholder="מחיר מקסימלי">
+        <select id="filterScore"><option value="0">כל ציוני העסקה</option><option value="80">80 ומעלה</option><option value="90">90 ומעלה</option></select>
+        <select id="filterSeller"><option value="">כל המוכרים</option><option>מוכר פרטי</option><option>סוחר</option></select>
+      </div>
+      <div id="listingsGrid" class="cards"></div>
+    </section>
+
+    <section id="page-searches" class="page hidden">
+      <div class="section-head"><h1>החיפושים שלי</h1><button class="btn primary" data-open-search>צור חיפוש</button></div>
+      <div id="searchesList" class="panel"></div>
+    </section>
+
+    <section id="page-market" class="page hidden">
+      <h1>ניתוח שוק</h1>
+      <div class="metrics">
+        <div class="metric"><small>חציון שוק</small><strong id="marketMedian">-</strong></div>
+        <div class="metric"><small>מחיר ממוצע</small><strong id="marketAverage">-</strong></div>
+        <div class="metric"><small>קילומטראז' ממוצע</small><strong id="marketMileage">-</strong></div>
+        <div class="metric"><small>ציון עסקה ממוצע</small><strong id="marketScore">-</strong></div>
+      </div>
+      <div class="panel"><h2>טווח מחירים</h2><div id="marketChart" class="chart"></div></div>
+      <div class="panel"><h2>היסטוריית ירידות מחיר</h2><div id="priceHistory"></div></div>
+    </section>
+
+    <section id="page-alerts" class="page hidden"><h1>התראות</h1><div id="alertsList" class="panel"></div></section>
+
+    <section id="page-settings" class="page hidden">
+      <h1>הגדרות</h1>
+      <div class="panel settings-list">
+        <div class="setting"><div><strong>שרת נתונים</strong><small id="serverState">לא הוגדר</small></div><button id="serverConfig" class="btn">הגדר</button></div>
+        <div class="setting"><div><strong>Telegram</strong><small id="telegramState">נדרש שרת נתונים</small></div><div><button id="telegramConfig" class="btn">הגדר</button><button id="testTelegram" class="btn ghost">בדיקה</button></div></div>
+        <div class="setting"><div><strong>יד2</strong><small id="yad2State">חיבור דרך קישור חיפוש ציבורי</small></div><button id="testYad2" class="btn">בדוק וייבא</button></div>
+        <div class="setting"><div><strong>מחירון לוי יצחק</strong><small id="leviState">מחירון ידני או חציון שוק</small></div><div><button id="leviConfig" class="btn">API מורשה</button><button id="manualPrice" class="btn ghost">הזן מחיר</button></div></div>
+        <div class="setting"><div><strong>התראות במכשיר</strong><small>אישור התראות מהדפדפן או האפליקציה</small></div><button id="requestNotify" class="btn">הפעל</button></div>
+        <div class="setting"><div><strong>גיבוי נתונים</strong><small>ייצוא JSON של הנתונים המקומיים</small></div><button id="exportData" class="btn">ייצוא</button></div>
+        <div class="setting"><div><strong>איפוס</strong><small>מחיקת כל הנתונים המקומיים</small></div><button id="resetData" class="btn danger">מחק הכל</button></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button data-nav="dashboard" class="active">⌂<span>לוח בקרה</span></button>
+    <button data-nav="searches">⌕<span>חיפושים</span></button>
+    <button data-nav="listings">▤<span>מודעות</span></button>
+    <button data-nav="market">▥<span>שוק</span></button>
+    <button data-nav="alerts">●<span>התראות</span></button>
+    <button data-nav="settings">⚙<span>הגדרות</span></button>
+  </nav>
+
+  <div id="searchModal" class="modal hidden"><div class="modal-card"><button class="close" data-close>×</button><h2>חיפוש חדש</h2><form id="searchForm">
+    <label>שם החיפוש<input name="name" required placeholder="לדוגמה RAV4 עד 190 אלף"></label>
+    <label>יצרן<input name="make" placeholder="Toyota"></label><label>דגם<input name="model" placeholder="RAV4"></label>
+    <div class="two"><label>משנתון<input name="yearMin" type="number"></label><label>עד שנתון<input name="yearMax" type="number"></label></div>
+    <div class="two"><label>מחיר מקסימלי<input name="maxPrice" type="number"></label><label>קילומטראז' מקסימלי<input name="maxMileage" type="number"></label></div>
+    <label>קישור חיפוש חיצוני<input name="sourceUrl" type="url" placeholder="https://www.yad2.co.il/vehicles/cars?..." dir="ltr"></label>
+    <button class="btn primary wide" type="submit">שמור חיפוש</button>
+  </form></div></div>
+
+  <div id="detailModal" class="modal hidden"><div class="modal-card wide-card" id="detailContent"></div></div>
+  <div id="toast" class="toast hidden"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
