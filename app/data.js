@@ -1,6 +1,1 @@
-window.AUTO_DEAL_DEFAULT_LISTINGS=[
-{id:'demo-1',make:'Toyota',model:'RAV4',trim:'Hybrid E-Motion',year:2023,price:189000,referencePrice:207000,marketMedian:201500,mileage:41000,hand:1,location:'תל אביב',seller:'מוכר פרטי',fuel:'היברידי',score:91,published:'לפני 3 דקות',status:'חדש',sourceUrl:'https://www.yad2.co.il/vehicles/cars'},
-{id:'demo-2',make:'Kia',model:'Niro',trim:'EX Hybrid',year:2022,price:129500,referencePrice:143000,marketMedian:138900,mileage:53500,hand:1,location:'ראשון לציון',seller:'מוכר פרטי',fuel:'היברידי',score:88,published:'לפני 18 דקות',status:'ירידת מחיר',sourceUrl:'https://www.yad2.co.il/vehicles/cars'},
-{id:'demo-3',make:'Tesla',model:'Model 3',trim:'RWD',year:2023,price:142000,referencePrice:151000,marketMedian:149500,mileage:29000,hand:1,location:'הרצליה',seller:'מוכר פרטי',fuel:'חשמלי',score:84,published:'לפני שעה',status:'חדש',sourceUrl:'https://www.yad2.co.il/vehicles/cars'},
-{id:'demo-4',make:'Mazda',model:'CX-5',trim:'Premium',year:2021,price:124900,referencePrice:128000,marketMedian:126500,mileage:68000,hand:2,location:'חיפה',seller:'סוחר',fuel:'בנזין',score:72,published:'אתמול',status:'פורסם מחדש',sourceUrl:'https://www.yad2.co.il/vehicles/cars'}
-];
+window.AUTO_DEAL_DEFAULT_LISTINGS=[];
