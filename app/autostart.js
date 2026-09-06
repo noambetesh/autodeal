@@ -1,4 +1,8 @@
 function loadSearchAutocomplete(){
+  const style=document.createElement('link');
+  style.rel='stylesheet';
+  style.href='search-autocomplete.css';
+  document.head.appendChild(style);
   const catalog=document.createElement('script');
   catalog.src='car-catalog.js';
   catalog.onload=()=>{
