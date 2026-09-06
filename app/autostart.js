@@ -1,4 +1,16 @@
+function loadSearchAutocomplete(){
+  const catalog=document.createElement('script');
+  catalog.src='car-catalog.js';
+  catalog.onload=()=>{
+    const autocomplete=document.createElement('script');
+    autocomplete.src='search-autocomplete.js';
+    document.body.appendChild(autocomplete);
+  };
+  document.body.appendChild(catalog);
+}
+
 window.addEventListener('load', async () => {
+  loadSearchAutocomplete();
   try {
     const hasLiveListing = state.listings.some(x => x.sourceUrl && /yad2\.co\.il/i.test(x.sourceUrl));
     if (hasLiveListing) return;
