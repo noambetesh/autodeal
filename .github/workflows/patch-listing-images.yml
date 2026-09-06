@@ -1,0 +1,61 @@
+name: Patch listing images
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/patch-listing-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add real listing image support
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          app = Path('app/app.js')
+          s = app.read_text()
+
+          old = '''function carArt(){return `<svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg"><rect width="520" height="240" fill="#16314d"/><path d="M90 166l55-78h220l55 78h28v31H64v-31z" fill="#59d0ff"/><path d="M177 104h151l35 48H143z" fill="#10233a"/><circle cx="145" cy="193" r="30" fill="#07111f"/><circle cx="374" cy="193" r="30" fill="#07111f"/></svg>`}'''
+          new = '''function carArt(){return `<div class="listing-photo-fallback">תמונה לא זמינה</div>`}\nfunction carVisual(l){const u=esc(l.imageUrl||l.image||l.thumbnail||'');return u?`<img class="listing-photo" src="${u}" alt="תמונת ${esc(l.make)} ${esc(l.model)}" loading="lazy" onerror="this.outerHTML=carArt()">`:carArt()}'''
+          if old in s:
+              s = s.replace(old, new)
+          s = s.replace('${carArt()}<span class="badge">', '${carVisual(l)}<span class="badge">')
+          s = s.replace('<div class="car-image">${carArt()}</div><div class="metrics">', '<div class="car-image">${carVisual(l)}</div><div class="metrics">')
+          app.write_text(s)
+
+          server = Path('server/server.mjs')
+          s = server.read_text()
+          old_fragment = "sourceUrl:String(x.sourceUrl||x.url||''),published:String(x.published||'עכשיו')"
+          new_fragment = "sourceUrl:String(x.sourceUrl||x.url||''),imageUrl:String(x.imageUrl||x.image||x.thumbnail||x.image_url||''),published:String(x.published||'עכשיו')"
+          if old_fragment in s:
+              s = s.replace(old_fragment, new_fragment)
+          server.write_text(s)
+
+          css = Path('app/styles.css')
+          c = css.read_text()
+          extra = '''\n/* Real listing photos */\n.car-image{overflow:hidden;position:relative;background:#10243a}\n.car-image .listing-photo{width:100%;height:100%;min-height:180px;max-height:280px;object-fit:cover;display:block}\n.listing-photo-fallback{min-height:190px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#10243a,#183957);color:#9fb2c8;font-weight:700}\n#detailContent .car-image .listing-photo{max-height:420px;object-fit:contain;background:#07111f}\n'''
+          if 'Real listing photos' not in c:
+              c += extra
+          css.write_text(c)
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name "AutoDeal Builder"
+          git config user.email "actions@users.noreply.github.com"
+          git add app/app.js app/styles.css server/server.mjs
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+          else
+            git commit -m "Show real listing photos from source ads"
+            git push
+          fi
