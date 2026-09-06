@@ -1,8 +1,11 @@
 package il.autodeal.app;
 
+import android.Manifest;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -13,13 +16,15 @@ import android.view.View;
 import android.graphics.Color;
 
 public class MainActivity extends Activity {
+    private static final int NOTIFICATION_PERMISSION_REQUEST = 1001;
     private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setStatusBarColor(Color.rgb(7,17,31));
-        getWindow().setNavigationBarColor(Color.rgb(7,17,31));
+        getWindow().setStatusBarColor(Color.rgb(8, 18, 32));
+        getWindow().setNavigationBarColor(Color.rgb(8, 18, 32));
+
         webView = new WebView(this);
         webView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -37,8 +42,20 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
+
         setContentView(webView);
         webView.loadUrl("file:///android_asset/index.html");
+        requestRequiredPermissionsOnce();
+    }
+
+    private void requestRequiredPermissionsOnce() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+                    new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                    NOTIFICATION_PERMISSION_REQUEST
+            );
+        }
     }
 
     @Override
