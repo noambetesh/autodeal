@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 const ROOT=path.dirname(fileURLToPath(import.meta.url));
 const DATA=path.join(ROOT,'data','db.json');
 const SETTINGS=path.join(ROOT,'data','settings.json');
-const PORT=Number(process.env.PORT||8787);
+const PORT=8787;
 const origin=process.env.ALLOWED_ORIGIN||'*';
 const readJson=(f,fallback)=>{try{return JSON.parse(fs.readFileSync(f,'utf8'))}catch{return fallback}};
 const writeJson=(f,v)=>{fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,JSON.stringify(v,null,2))};
