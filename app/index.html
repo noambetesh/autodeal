@@ -67,7 +67,7 @@
       <div class="panel settings-list">
         <div class="setting"><div><strong>שרת נתונים</strong><small id="serverState">מחובר אוטומטית</small></div><button id="serverConfig" class="btn">שנה</button></div>
         <div class="setting"><div><strong>Telegram</strong><small id="telegramState">אופציונלי</small></div><div><button id="telegramConfig" class="btn">הגדר</button><button id="testTelegram" class="btn ghost">בדיקה</button></div></div>
-        <div class="setting"><div><strong>יד2</strong><small id="yad2State">ייבוא מודעות ציבוריות + מחירון יד2</small></div><button id="testYad2" class="btn">בדוק וייבא</button></div>
+        <div class="setting"><div><strong>יד2</strong><small id="yad2State">חיפוש חי + ייבוא כאשר יד2 מאפשר גישה</small></div><button id="testYad2" class="btn">בדוק וייבא</button></div>
         <div class="setting"><div><strong>מחירון לוי יצחק</strong><small id="leviState">דורש API מורשה כדי להציג מחיר אמיתי</small></div><div><button id="leviConfig" class="btn">API מורשה</button><button id="manualPrice" class="btn ghost">הזן מחיר</button></div></div>
         <div class="setting"><div><strong>התראות במכשיר</strong><small>אישור התראות מהאפליקציה</small></div><button id="requestNotify" class="btn">הפעל</button></div>
         <div class="setting"><div><strong>גיבוי נתונים</strong><small>ייצוא JSON של הנתונים המקומיים</small></div><button id="exportData" class="btn">ייצוא</button></div>
@@ -85,7 +85,7 @@
     <button data-nav="settings">⚙<span>הגדרות</span></button>
   </nav>
 
-  <div id="searchModal" class="modal hidden"><div class="modal-card search-card"><button class="close" data-close>×</button><div class="modal-heading"><span class="eyebrow">חיפוש חדש</span><h2>מה הרכב שאתה מחפש?</h2><p>בחר יצרן ודגם, אחר כך הוסף תקציב ושנתון. השם של החיפוש ייווצר אוטומטית.</p></div><form id="searchForm">
+  <div id="searchModal" class="modal hidden"><div class="modal-card search-card"><button class="close" data-close>×</button><div class="modal-heading"><span class="eyebrow">חיפוש חדש</span><h2>מה הרכב שאתה מחפש?</h2><p>בחר יצרן ודגם, אחר כך הוסף תקציב ושנתון. שם החיפוש נוצר לבד.</p></div><form id="searchForm">
     <label>יצרן<input name="make" placeholder="טויוטה"></label>
     <label>דגם<input name="model" placeholder="יאריס"></label>
     <div class="two"><label>משנתון<input name="yearMin" type="number" inputmode="numeric" placeholder="2020"></label><label>עד שנתון<input name="yearMax" type="number" inputmode="numeric" placeholder="2025"></label></div>
@@ -93,7 +93,7 @@
       <label>מחיר מקסימלי<div class="formatted-field"><input id="maxPriceDisplay" inputmode="numeric" placeholder="30,000"><span>₪</span><input id="maxPriceRaw" name="maxPrice" type="hidden"></div></label>
       <label>קילומטראז' מקסימלי<div class="formatted-field"><input id="maxMileageDisplay" inputmode="numeric" placeholder="80,000"><span>ק״מ</span><input id="maxMileageRaw" name="maxMileage" type="hidden"></div></label>
     </div>
-    <label>קישור חיפוש מיד2 <span class="optional">אופציונלי</span><input name="sourceUrl" type="url" placeholder="https://www.yad2.co.il/vehicles/cars?..." dir="ltr"></label>
+    <label>קישור חיפוש מיד2 <span class="optional">אופציונלי</span><input name="sourceUrl" type="url" placeholder="לא צריך למלא בטויוטה יאריס, קורולה, RAV4 או C-HR" dir="ltr"></label>
     <button class="btn primary wide search-submit" type="submit">שמור והתחל לעקוב</button>
   </form></div></div>
 
@@ -102,7 +102,7 @@
   <script src="config.js"></script>
   <script src="data.js"></script>
   <script src="app.js"></script>
-  <script src="search-name-auto.js"></script>
+  <script src="search-fixes.js"></script>
   <script src="autostart.js"></script>
   <script src="ux-enhancements.js"></script>
 </body>
