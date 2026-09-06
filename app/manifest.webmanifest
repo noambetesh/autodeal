@@ -1,0 +1,12 @@
+{
+  "name": "AutoDeal - חיפוש רכבים",
+  "short_name": "AutoDeal",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#0f172a",
+  "description": "חיפוש, מעקב וניתוח עסקאות רכב",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
